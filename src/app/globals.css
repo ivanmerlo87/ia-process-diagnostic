@@ -432,7 +432,10 @@ input[type="range"] {
   color: white;
   font-weight: 700;
   text-align: center;
-  white-space: nowrap;
+  line-height: 1.35;
+  white-space: normal;
+  text-wrap: balance;
+  max-width: 22rem;
 }
 
 .cta-button:hover {
@@ -462,6 +465,7 @@ input[type="range"] {
 
   .cta-band {
     align-items: start;
+    flex-direction: column;
   }
 }
 
@@ -472,5 +476,15 @@ input[type="range"] {
 
   .results-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cta-button {
+    width: 100%;
+    max-width: none;
+  }
+
+  .chip {
+    min-height: 3.75rem;
+    align-content: center;
   }
 }

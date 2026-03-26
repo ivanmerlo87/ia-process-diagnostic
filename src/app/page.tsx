@@ -104,7 +104,7 @@ export default function Home() {
       <section className="content-band">
         <div className="section-heading">
           <p className="eyebrow">Cómo usarla</p>
-          <h2>No vende humo. Ordena la señal antes de invertir tiempo.</h2>
+          <h2>No exagera. Ordena la señal antes de invertir tiempo.</h2>
         </div>
         <div className="card-grid">
           <article className="info-card">
