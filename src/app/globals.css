@@ -71,6 +71,7 @@ select:focus {
 }
 
 .hero,
+.tool-band,
 .content-band,
 .cta-band {
   width: min(1160px, calc(100% - 2rem));
@@ -85,10 +86,19 @@ select:focus {
   align-items: start;
 }
 
+.hero-single {
+  grid-template-columns: 1fr;
+  padding-bottom: 1rem;
+}
+
 .hero-copy {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
+}
+
+.tool-band {
+  padding: 0 0 2rem;
 }
 
 .hero-copy h1 {

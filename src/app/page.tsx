@@ -74,7 +74,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <section className="hero">
+      <section className="hero hero-single">
         <div className="hero-copy">
           <p className="eyebrow">IA Aplicada Argentina</p>
           <h1>Diagnóstico de procesos con IA para detectar quick wins reales</h1>
@@ -98,6 +98,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="tool-band">
         <DiagnosticStudio />
       </section>
 
