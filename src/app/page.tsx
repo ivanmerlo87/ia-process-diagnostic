@@ -179,6 +179,10 @@ export default function Home() {
           href="https://wa.me/5491123963538?text=Hola%20Ivan%2C%20us%C3%A9%20el%20diagn%C3%B3stico%20de%20procesos%20con%20IA%20y%20quiero%20validar%20un%20caso."
           target="_blank"
           rel="noreferrer"
+          data-analytics-event="diagnostic_page_whatsapp_click"
+          data-analytics-label="Pasar el caso por WhatsApp"
+          data-analytics-placement="diagnostic_page_final_cta"
+          data-analytics-lead="true"
         >
           Pasar el caso por WhatsApp
         </a>

@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { trackCustomEvent } from "@/components/site-analytics";
 
 type CompanySize = "micro" | "pyme" | "midmarket" | "enterprise";
 type ProcessArea = "ventas" | "operaciones" | "atencion" | "administracion";
@@ -95,6 +96,8 @@ function clamp(value: number, min: number, max: number) {
 
 export function DiagnosticStudio() {
   const [inputs, setInputs] = useState<Inputs>(initialState);
+  const trackedStart = useRef(false);
+  const trackedScore = useRef(false);
 
   const results = useMemo(() => {
     const readinessScore =
@@ -160,6 +163,46 @@ export function DiagnosticStudio() {
       `Uso más prometedor: ${results.useCases[0]}.`,
     ].join(" "),
   );
+
+  useEffect(() => {
+    if (!trackedStart.current) {
+      trackedStart.current = true;
+      trackCustomEvent({
+        eventName: "diagnostic_tool_started",
+        label: "Diagnostico de procesos",
+        placement: "diagnostic_studio",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (trackedScore.current) {
+      return;
+    }
+
+    if (
+      inputs.companySize === initialState.companySize &&
+      inputs.processArea === initialState.processArea &&
+      inputs.peopleInvolved === initialState.peopleInvolved &&
+      inputs.weeklyHoursLost === initialState.weeklyHoursLost &&
+      inputs.monthlyVolume === initialState.monthlyVolume &&
+      inputs.averageTicketUsd === initialState.averageTicketUsd &&
+      inputs.systemsConnected === initialState.systemsConnected &&
+      inputs.dataReadiness === initialState.dataReadiness &&
+      inputs.urgency === initialState.urgency &&
+      inputs.pains.length === initialState.pains.length &&
+      inputs.pains.every((pain, index) => pain === initialState.pains[index])
+    ) {
+      return;
+    }
+
+    trackedScore.current = true;
+    trackCustomEvent({
+      eventName: "diagnostic_tool_scored",
+      label: "Diagnostico completado",
+      placement: "diagnostic_studio",
+    });
+  }, [inputs]);
 
   function setField<K extends keyof Inputs>(field: K, value: Inputs[K]) {
     setInputs((current) => ({ ...current, [field]: value }));
@@ -358,6 +401,10 @@ export function DiagnosticStudio() {
           href={`https://wa.me/5491123963538?text=${whatsappText}`}
           target="_blank"
           rel="noreferrer"
+          data-analytics-event="diagnostic_tool_whatsapp_click"
+          data-analytics-label="Enviar diagnostico por WhatsApp"
+          data-analytics-placement="diagnostic_studio_results"
+          data-analytics-lead="true"
         >
           Enviar diagnóstico por WhatsApp
         </a>
